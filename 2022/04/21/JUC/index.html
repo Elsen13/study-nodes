@@ -23,16 +23,16 @@
 <meta property="og:site_name" content="AnrozzX">
 <meta property="og:description" content="了解多线程并发以及在Java的应用">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://assoz.coding.net/p/study-blog/d/study-imgs/git/raw/main/imgs/head/post/JUC.jpg">
+<meta property="og:image" content="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/cover/JUC.jpg">
 <meta property="article:published_time" content="2022-04-21T02:50:00.000Z">
-<meta property="article:modified_time" content="2022-05-29T13:14:58.586Z">
+<meta property="article:modified_time" content="2022-08-04T05:21:25.638Z">
 <meta property="article:author" content="Anrozz炫">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="多线程">
 <meta property="article:tag" content="并发">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://assoz.coding.net/p/study-blog/d/study-imgs/git/raw/main/imgs/head/post/JUC.jpg">
+<meta name="twitter:image" content="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/cover/JUC.jpg">
   
   
   <title>JUC - AnrozzX</title>
@@ -72,7 +72,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"study-nodes.vercel.app","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"WjHIDOqzb1daY6OtrltW0izN-gzGzoHsz","app_key":"BmmacmxlOzYnoNfkcBoAMO16","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"study-nodes.vercel.app","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"WjHIDOqzb1daY6OtrltW0izN-gzGzoHsz","app_key":"BmmacmxlOzYnoNfkcBoAMO16","server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -176,7 +176,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://assoz.coding.net/p/study-blog/d/study-imgs/git/raw/main/imgs/head/post/JUC.jpg') no-repeat center center;
+         style="background: url('https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/cover/JUC.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -187,6 +187,11 @@
 
             
               <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      Anrozz炫
+    </span>
   
   
     <span class="post-meta">
@@ -217,14 +222,6 @@
 
   
   
-    
-      <!-- LeanCloud 统计文章PV -->
-      <span id="leancloud-page-views-container" class="post-meta" style="display: none">
-        <i class="iconfont icon-eye" aria-hidden="true"></i>
-        <span id="leancloud-page-views"></span> 次
-      </span>
-    
-  
 </div>
 
             
@@ -253,6 +250,8 @@
             <div class="markdown-body">
               <p><strong>了解多线程并发以及在Java的应用</strong></p>
 <span id="more"></span>
+
+
 
 <p>笔记作于:<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV16J411h7Rd?p=5&spm_id_from=pageDriver">黑马程序员全面深入学习Java并发编程，JUC并发编程全套教程</a></p>
 <blockquote>
@@ -305,11 +304,11 @@
 </ul>
 <h3 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h3><p>单核 cpu 下，线程实际还是 <code>串行执行</code> 的。操作系统中有一个组件叫做任务调度器，将 cpu 的时间片（windows 下时间片最小约为 15 毫秒）分给不同的程序使用，只是由于 cpu 在线程间（时间片很短）的切换非常快，人类感觉是 <code>同时运行的</code> 。总结为一句话就是： <code>**微观串行，宏观并行**</code> ， </p>
 <p><strong>一般会将这种</strong> <code>**线程轮流使用 CPU**</code> <strong>的做法称为并发， concurrent</strong></p>
-<p><img src="https://assoz.coding.net/p/study-blog/d/study-imgs/git/raw/main/imgs/1648650642294-3244b7b5-7504-48c7-bcc4-f8a14f4a64dc.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://assoz.coding.net/p/study-blog/d/study-imgs/git/raw/main/imgs/1648650712710-c1b91ccb-3983-4229-8249-d0a71756bb1a.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/1648650642294-3244b7b5-7504-48c7-bcc4-f8a14f4a64dc.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/1648650712710-c1b91ccb-3983-4229-8249-d0a71756bb1a.png" srcset="/img/loading.gif" lazyload alt="img"></p>
 <p>多核 cpu下，每个 <code>核（core）</code> 都可以调度运行线程，这时候线程可以是并行的</p>
-<p><img src="https://assoz.coding.net/p/study-blog/d/study-imgs/git/raw/main/imgs/1648650756667-a3a43425-081f-4760-a4db-be025953aa48.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p><img src="https://assoz.coding.net/p/study-blog/d/study-imgs/git/raw/main/imgs/1648650811806-d990d762-4670-4f7d-8c76-f6b22f42e9a7.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/1648650756667-a3a43425-081f-4760-a4db-be025953aa48.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/1648650811806-d990d762-4670-4f7d-8c76-f6b22f42e9a7.png" srcset="/img/loading.gif" lazyload alt="img"></p>
 <h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><ul>
 <li>家庭主妇做饭、打扫卫生、给孩子喂奶，她一个人轮流交替做这多件事，这时就是并发 </li>
 <li>家庭主妇雇了个保姆，她们一起这些事，这时既有并发，也有并行（这时会产生竞争，例如锅只有一口，一 个人用锅时，另一个人就得等待）</li>
@@ -641,7 +640,7 @@
 <li>需要等待结果返回，才能继续运行就是同步</li>
 <li>不需要等待结果返回，就能继续运行就是异步</li>
 </ul>
-<p><img src="https://assoz.coding.net/p/study-blog/d/study-imgs/git/raw/main/imgs/image-20220422210423926.png" srcset="/img/loading.gif" lazyload alt="image-20220422210423926"></p>
+<p><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220422210423926.png" srcset="/img/loading.gif" lazyload alt="img"></p>
 <h4 id="等待多个结果"><a href="#等待多个结果" class="headerlink" title="等待多个结果"></a>等待多个结果</h4><p>问，下面代码 cost 大约多少秒？</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">r1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">r2</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>    test2();<br>&#125;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test2</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>    <span class="hljs-type">Thread</span> <span class="hljs-variable">t1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>        sleep(<span class="hljs-number">1</span>);<br>        r1 = <span class="hljs-number">10</span>;<br>    &#125;);<br>    <span class="hljs-type">Thread</span> <span class="hljs-variable">t2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>        sleep(<span class="hljs-number">2</span>);<br>        r2 = <span class="hljs-number">20</span>;<br>    &#125;);<br>    <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    t1.start();<br>    t2.start();<br>    t1.join();<br>    t2.join();<br>    <span class="hljs-type">long</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>    log.debug(<span class="hljs-string">&quot;r1: &#123;&#125; r2: &#123;&#125; cost: &#123;&#125;&quot;</span>, r1, r2, end - start);<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -823,23 +822,23 @@ C[泡茶]
 
 <h3 id="共享带来的问题"><a href="#共享带来的问题" class="headerlink" title="共享带来的问题"></a>共享带来的问题</h3><h4 id="小故事"><a href="#小故事" class="headerlink" title="小故事"></a>小故事</h4><ul>
 <li>老王（操作系统）有一个功能强大的算盘（CPU），现在想把它租出去，赚一点外快</li>
-<li><img src="/JUC/image-20220526231636048.png" srcset="/img/loading.gif" lazyload alt="image-20220526231636048"></li>
+<li><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220526231636048.png" srcset="/img/loading.gif" lazyload alt="image-20220526231636048"></li>
 <li>小南、小女（线程）来使用这个算盘来进行一些计算，并按照时间给老王支付费用</li>
 <li>但小南不能一天24小时使用算盘，他经常要小憩一会（sleep），又或是去吃饭上厕所（阻塞 io 操作），有时还需要一根烟，没烟时思路全无（wait）这些情况统称为（阻塞）</li>
-<li><img src="/JUC/image-20220526231655155.png" srcset="/img/loading.gif" lazyload alt="image-20220526231655155"></li>
+<li><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220526231655155.png" srcset="/img/loading.gif" lazyload alt="image-20220526231655155"></li>
 <li>在这些时候，算盘没利用起来（不能收钱了），老王觉得有点不划算</li>
 <li>另外，小女也想用用算盘，如果总是小南占着算盘，让小女觉得不公平</li>
 <li>于是，老王灵机一动，想了个办法 [ 让他们每人用一会，轮流使用算盘 ]</li>
 <li>这样，当小南阻塞的时候，算盘可以分给小女使用，不会浪费，反之亦然</li>
 <li>最近执行的计算比较复杂，需要存储一些中间结果，而学生们的脑容量（工作内存）不够，所以老王申请了一个笔记本（主存），把一些中间结果先记在本上</li>
 <li>计算流程是这样的</li>
-<li><img src="/JUC/image-20220526231727233.png" srcset="/img/loading.gif" lazyload alt="image-20220526231727233"></li>
+<li><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220526231727233.png" srcset="/img/loading.gif" lazyload alt="image-20220526231727233"></li>
 <li>但是由于分时系统，有一天还是发生了事故</li>
 <li>小南刚读取了初始值 0 做了个 +1 运算，还没来得及写回结果</li>
 <li>老王说 [ 小南，你的时间到了，该别人了，记住结果走吧 ]，于是小南念叨着 [ 结果是1，结果是1…] 不甘心地到一边待着去了（上下文切换）</li>
 <li>老王说 [ 小女，该你了 ]，小女看到了笔记本上还写着 0 做了一个 -1 运算，将结果 -1 写入笔记本</li>
 <li>这时小女的时间也用完了，老王又叫醒了小南：[小南，把你上次的题目算完吧]，小南将他脑海中的结果 1 写入了笔记本</li>
-<li><img src="/JUC/image-20220526231808475.png" srcset="/img/loading.gif" lazyload alt="image-20220526231808475"></li>
+<li><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220526231808475.png" srcset="/img/loading.gif" lazyload alt="image-20220526231808475"></li>
 <li>小南和小女都觉得自己没做错，但笔记本里的结果是 1 而不是 0</li>
 </ul>
 <h4 id="Java-的体现"><a href="#Java-的体现" class="headerlink" title="Java 的体现"></a>Java 的体现</h4><p>两个线程对初始值为 0 的静态变量一个做自增，一个做自减，各做 5000 次，结果是 0 吗？</p>
@@ -854,7 +853,7 @@ C[泡茶]
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">getstatic i <span class="hljs-comment">// 获取静态变量i的值</span><br>iconst_1 <span class="hljs-comment">// 准备常量1</span><br>isub <span class="hljs-comment">// 自减</span><br>putstatic i <span class="hljs-comment">// 将修改后的值存入静态变量i</span><br></code></pre></td></tr></table></figure>
 
 <p>而 Java 的内存模型如下，完成静态变量的自增，自减需要在主存和工作内存中进行数据交换：</p>
-<p><img src="/JUC/image-20220526232014649.png" srcset="/img/loading.gif" lazyload alt="image-20220526232014649"></p>
+<p><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220526232014649.png" srcset="/img/loading.gif" lazyload alt="image-20220526232014649"></p>
 <p>如果是单线程以上 8 行代码是顺序执行（不会交错）没有问题：</p>
 <pre><code class=" mermaid">sequenceDiagram
 　　static i-&gt;&gt;线程1: getstatic i 读取 0
@@ -935,7 +934,7 @@ static i-&gt;&gt;线程2: getstatic i 读取 0
 <p>解决</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">counter</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Object</span> <span class="hljs-variable">room</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>    <span class="hljs-type">Thread</span> <span class="hljs-variable">t1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5000</span>; i++) &#123;<br>            <span class="hljs-keyword">synchronized</span> (room) &#123;<br>                counter++;<br>            &#125;<br>        &#125;<br>    &#125;, <span class="hljs-string">&quot;t1&quot;</span>);<br>    <span class="hljs-type">Thread</span> <span class="hljs-variable">t2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5000</span>; i++) &#123;<br>            <span class="hljs-keyword">synchronized</span> (room) &#123;<br>                counter--;<br>            &#125;<br>        &#125;<br>    &#125;, <span class="hljs-string">&quot;t2&quot;</span>);<br>    t1.start();<br>    t2.start();<br>    t1.join();<br>    t2.join();<br>    log.debug(<span class="hljs-string">&quot;&#123;&#125;&quot;</span>,counter);<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><img src="/JUC/image-20220527211905973.png" srcset="/img/loading.gif" lazyload alt="image-20220527211905973"></p>
+<p><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220527211905973.png" srcset="/img/loading.gif" lazyload alt="image-20220527211905973"></p>
 <p>你可以做这样的类比：</p>
 <ul>
 <li><code>synchronized(对象)</code>中的对象，可以想象为一个房间（room），有唯一入口（门）房间只能一次进入一人进行计算，线程 t1，t2 想象成两个人</li>
@@ -1032,7 +1031,7 @@ Note over 线程1,锁对象: 拥有锁
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test1</span><span class="hljs-params">()</span>;<br>descriptor: ()V<br>    flags: ACC_PUBLIC, ACC_STATIC<br>        Code:<br>stack=<span class="hljs-number">1</span>, locals=<span class="hljs-number">1</span>, args_size=<span class="hljs-number">0</span><br>    <span class="hljs-number">0</span>: bipush <span class="hljs-number">10</span><br>        <span class="hljs-number">2</span>: istore_0<br>            <span class="hljs-number">3</span>: iinc <span class="hljs-number">0</span>, <span class="hljs-number">1</span><br>                <span class="hljs-number">6</span>: <span class="hljs-keyword">return</span><br>                    LineNumberTable:<br>line <span class="hljs-number">10</span>: <span class="hljs-number">0</span><br>    line <span class="hljs-number">11</span>: <span class="hljs-number">3</span><br>        line <span class="hljs-number">12</span>: <span class="hljs-number">6</span><br>            LocalVariableTable:<br>Start Length Slot Name Signature<br>    <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">0</span> i I<br></code></pre></td></tr></table></figure>
 
 <p>如图</p>
-<p><img src="/JUC/image-20220528165232912.png" srcset="/img/loading.gif" lazyload alt="image-20220528165232912"></p>
+<p><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220528165232912.png" srcset="/img/loading.gif" lazyload alt="image-20220528165232912"></p>
 <p>局部变量的引用稍有不同</p>
 <p>先看一个成员变量的例子</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ThreadUnsafe</span> &#123;<br>    ArrayList&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method1</span><span class="hljs-params">(<span class="hljs-type">int</span> loopNumber)</span> &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; loopNumber; i++) &#123;<br>            <span class="hljs-comment">// &#123; 临界区, 会产生竞态条件</span><br>            method2();<br>            method3();<br>            <span class="hljs-comment">// &#125; 临界区</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method2</span><span class="hljs-params">()</span> &#123;<br>        list.add(<span class="hljs-string">&quot;1&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method3</span><span class="hljs-params">()</span> &#123;<br>        list.remove(<span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -1048,7 +1047,7 @@ Note over 线程1,锁对象: 拥有锁
 <li>无论哪个线程中的 method2 引用的都是同一个对象中的 list 成员变量</li>
 <li>method3 与 method2 分析相同</li>
 </ul>
-<p><img src="/JUC/image-20220528165507888.png" srcset="/img/loading.gif" lazyload alt="image-20220528165507888"></p>
+<p><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220528165507888.png" srcset="/img/loading.gif" lazyload alt="image-20220528165507888"></p>
 <p>将 list 修改为局部变量</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ThreadSafe</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method1</span><span class="hljs-params">(<span class="hljs-type">int</span> loopNumber)</span> &#123;<br>        ArrayList&lt;String&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; loopNumber; i++) &#123;<br>            method2(list);<br>            method3(list);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method2</span><span class="hljs-params">(ArrayList&lt;String&gt; list)</span> &#123;<br>        list.add(<span class="hljs-string">&quot;1&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">method3</span><span class="hljs-params">(ArrayList&lt;String&gt; list)</span> &#123;<br>        list.remove(<span class="hljs-number">0</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -1059,7 +1058,7 @@ Note over 线程1,锁对象: 拥有锁
 <li>而 method2 的参数是从 method1 中传递过来的，与 method1 中引用同一个对象</li>
 <li>method3 的参数分析与 method2 相同</li>
 </ul>
-<p><img src="/JUC/image-20220528165559249.png" srcset="/img/loading.gif" lazyload alt="image-20220528165559249"></p>
+<p><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220528165559249.png" srcset="/img/loading.gif" lazyload alt="image-20220528165559249"></p>
 <p>方法访问修饰符带来的思考，如果把 method2 和 method3 的方法修改为 public 会不会代理线程安全问题？</p>
 <ul>
 <li>情况1：有其它线程调用 method2 和 method3</li>
@@ -1190,12 +1189,12 @@ participant table
 <h4 id="原理之-synchronized-进阶"><a href="#原理之-synchronized-进阶" class="headerlink" title="* 原理之 synchronized 进阶"></a>* 原理之 synchronized 进阶</h4><h3 id="wait-notify"><a href="#wait-notify" class="headerlink" title="wait notify"></a>wait notify</h3><h4 id="小故事-为什么需要-wait"><a href="#小故事-为什么需要-wait" class="headerlink" title="小故事 - 为什么需要 wait"></a>小故事 - 为什么需要 wait</h4><ul>
 <li>由于条件不满足，小南不能继续进行计算</li>
 <li>但小南如果一直占用着锁，其它人就得一直阻塞，效率太低</li>
-<li><img src="/JUC/image-20220529210527021.png" srcset="/img/loading.gif" lazyload alt="image-20220529210527021"></li>
+<li><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220529210527021.png" srcset="/img/loading.gif" lazyload alt="image-20220529210527021"></li>
 <li>于是老王单开了一间休息室（调用 wait 方法），让小南到休息室（WaitSet）等着去了，但这时锁释放开，其它人可以由老王随机安排进屋</li>
 <li>直到小M将烟送来，大叫一声 [ 你的烟到了 ] （调用 notify 方法）</li>
-<li><img src="/JUC/image-20220529210542866.png" srcset="/img/loading.gif" lazyload alt="image-20220529210542866"></li>
+<li><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220529210542866.png" srcset="/img/loading.gif" lazyload alt="image-20220529210542866"></li>
 <li>小南于是可以离开休息室，重新进入竞争锁的队列</li>
-<li><img src="/JUC/image-20220529210554191.png" srcset="/img/loading.gif" lazyload alt="image-20220529210554191"></li>
+<li><img src="https://edu-elsen.oss-cn-guangzhou.aliyuncs.com/study-nodes/JUC.assets/image-20220529210554191.png" srcset="/img/loading.gif" lazyload alt="image-20220529210554191"></li>
 </ul>
 <h4 id="原理之-wait-x2F-notify"><a href="#原理之-wait-x2F-notify" class="headerlink" title="原理之 wait &#x2F; notify"></a>原理之 wait &#x2F; notify</h4><h4 id="API-介绍"><a href="#API-介绍" class="headerlink" title="API 介绍"></a>API 介绍</h4><ul>
 <li><code>obj.wait()</code>让进入 object 监视器的线程到 waitSet 等待</li>
@@ -1548,19 +1547,6 @@ participant table
   </script>
 
 
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
 
 
